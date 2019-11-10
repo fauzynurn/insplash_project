@@ -4,6 +4,7 @@ import 'package:insplash_project/didi.dart';
 import 'package:insplash_project/didipure.dart';
 import 'package:insplash_project/main.dart';
 import 'package:flutter_sequence_animation/flutter_sequence_animation.dart';
+import 'package:insplash_project/screens/login.dart';
 
 class Splash extends StatefulWidget {
   @override
@@ -19,12 +20,14 @@ class _SplashState extends State<Splash> with SingleTickerProviderStateMixin {
     super.initState();
     animationController = AnimationController(vsync: this);
     sequenceAnimation = new SequenceAnimationBuilder()
+        //683.4285714285714
+        //411.42857142857144
         .addAnimatable(
-            animatable: new Tween(begin: 1.0, end: 0.0),
-            from: const Duration(seconds: 0),
-            to: const Duration(seconds: 1),
-            tag: "opacity",
-            curve: Curves.linear)
+            animatable: new Tween(begin: 0.0, end: -1200.0),
+            from: const Duration(seconds: 2),
+            to: const Duration(seconds: 3),
+            tag: "goUp",
+            curve: Curves.elasticIn)
         .animate(animationController);
     animationController.forward();
   }
@@ -33,18 +36,13 @@ class _SplashState extends State<Splash> with SingleTickerProviderStateMixin {
   Widget build(BuildContext context) {
     return Stack(
       children: <Widget>[
-        Center(
-            child: Container(
-                child: Image.asset(
-          'assets/images/bg.jpg',
-          width: 300,
-          height: 300,
-        ))),
-        Didi(),
+        Login(),
         AnimatedBuilder(
           animation: animationController,
-          builder: (BuildContext context, Widget child){
-            return DidiPure(sequenceAnimation: sequenceAnimation,);
+          builder: (BuildContext context, Widget child) {
+            return DidiPure(
+              sequenceAnimation: sequenceAnimation,
+            );
           },
         )
       ],

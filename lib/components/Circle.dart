@@ -2,20 +2,21 @@ import 'package:flutter/material.dart';
 import 'package:flutter_sequence_animation/flutter_sequence_animation.dart';
 
 class Circle extends StatelessWidget {
-  final SequenceAnimation sequenceAnimation;
+final double width;
+final double height;
+final BorderRadiusGeometry radius;
+final Color color;
 
-  Circle({this.sequenceAnimation});
+Circle({this.width,this.height,this.radius,this.color});
 
   @override
   Widget build(BuildContext context) {
-    return Opacity(
-        opacity: sequenceAnimation["opacity"].value,
-        child: Container(
-          width: 200.0,
-          height: 200.0,
+    return Container(
+          width: this.width,
+          height: this.height,
           decoration: new BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(50)),
-        ));
+              color: this.color,
+              borderRadius: this.radius),
+        );
   }
 }
